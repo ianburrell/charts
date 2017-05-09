@@ -32,4 +32,4 @@ postgresql:
 
 redis:
     imageTag: 3.2.7
-    redisPassword: airflow
+    usePassword: false
