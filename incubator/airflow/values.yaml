@@ -11,8 +11,7 @@ loadExamples: "n"
 fernetKey: "46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho="
 
 service:
-  type: ClusterIP
-  externalPort: 80
+  type: NodePort
 
 worker:
   replicaCount: 1

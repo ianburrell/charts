@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "fullname" . }}-webserver
+  name: {{ template "fullname" . }}
   labels:
     app: {{ template "fullname" . }}
     component: webserver
