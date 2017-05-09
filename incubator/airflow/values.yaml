@@ -10,7 +10,11 @@ imagePullPolicy: IfNotPresent
 ##
 loadExamples: false
 
-fernetKey: "46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho="
+## Fernet key needs to be generated
+##
+## python -c "from cryptography.fernet import Fernet; print Fernet.generate_key().decode();"
+##
+# fernetKey:
 
 service:
   type: NodePort
