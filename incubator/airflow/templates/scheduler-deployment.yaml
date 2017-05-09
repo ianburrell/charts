@@ -30,7 +30,7 @@ spec:
           args: [ "scheduler" ]
           env:
             - name: LOAD_EX
-              value: {{ .Values.loadExamples | quote }}
+              value: {{ if .Values.loadExamples }}"y"{{ else }}"n"{{ end }}
             - name: EXECUTOR
               value: "Celery"
             - name: FERNET_KEY
