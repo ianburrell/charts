@@ -1,0 +1,11 @@
+apiVersion: v1
+description: Airflow is a platform to programmatically author, schedule and monitor workflows.
+name: airflow
+version: 0.1.0
+home: https://airflow.incubator.apache.org/
+sources:
+  - https://github.com/puckel/docker-airflow
+maintainer:
+  - name: Ian Burrell
+    email: "iburrell@comscore.com"
+appVersion: 1.8.0

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "fullname" . }}-webserver
+  labels:
+    app: {{ template "fullname" . }}-webserver
+    component: webserver
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+  - port: {{ .Values.service.externalPort }}
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: {{ template "fullname" . }}
+    component: webserver

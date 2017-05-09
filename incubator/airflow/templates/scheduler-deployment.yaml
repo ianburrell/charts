@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}-scheduler
+  labels:
+    app: {{ template "fullname" . }}
+    component: scheduler
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: {{ template "fullname" . }}
+        component: scheduler
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+        component: scheduler
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+    spec:
+      containers:
+        - name: scheduler
+          image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          command: [ "airflow", "scheduler" ]
+          ports:
+          - containerPort: 8080
+          resources: {}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/local/airflow/airflow.cfg
+              subPath: airflow.cfg
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ template "fullname" . }}
+            items:
+              - key: airflow.cfg
+                path: airflow.cfg
+  

@@ -1,0 +1,17 @@
+dependencies:
+- condition: ""
+  enabled: false
+  import-values: null
+  name: postgresql
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  tags: null
+  version: 0.6.0
+- condition: ""
+  enabled: false
+  import-values: null
+  name: redis
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  tags: null
+  version: 0.4.2
+digest: sha256:c4ba7dc4b23a61d3c1847ff9fcf696989018065f5a4c910a20709ee5d70a966f
+generated: 2017-05-05T14:39:27.480382471-07:00

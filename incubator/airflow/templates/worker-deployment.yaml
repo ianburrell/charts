@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}-worker
+  labels:
+    app: {{ template "fullname" . }}
+    component: worker
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: {{ .Values.worker.replicaCount }}
+  selector:
+    matchLabels:
+        app: {{ template "fullname" . }}
+        component: worker
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+        component: worker
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+    spec:
+      containers:
+        - name: worker
+          image: "{{ .Values.worker.image }}:{{ .Values.worker.imageTag }}"
+          imagePullPolicy: {{ .Values.worker.imagePullPolicy }}
+          command: [ "airflow", "worker" ]
+          resources: {}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/local/airflow/airflow.cfg
+              subPath: airflow.cfg
+      volumes:
+      - name: config-volume
+        configMap:
+          name: {{ template "fullname" . }}
+          items:
+            - key: airflow.cfg
+              path: airflow.cfg
+  
