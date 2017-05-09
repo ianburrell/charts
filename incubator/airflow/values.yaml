@@ -6,7 +6,7 @@ image: puckel/docker-airflow
 imageTag: 1.8.0
 imagePullPolicy: IfNotPresent
 
-loadExamples: "False"
+loadExamples: "n"
 
 fernetKey: "46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho="
 
