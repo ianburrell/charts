@@ -3,25 +3,21 @@ kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-flower
   labels:
-    app: {{ template "fullname" . }}
-    component: flower
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    app: "{{ .Chart.Name }}"
+    component: flower
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-        app: {{ template "fullname" . }}
-        component: flower
   template:
     metadata:
       labels:
-        app: {{ template "fullname" . }}
-        component: flower
-        chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-        release: "{{ .Release.Name }}"
         heritage: "{{ .Release.Service }}"
+        release: "{{ .Release.Name }}"
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+        app: "{{ .Chart.Name }}"
+        component: flower
     spec:
       containers:
         - name: flower

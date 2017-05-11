@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: {{ template "fullname" . }}-flower
   labels:
-    app: {{ template "fullname" . }}
-    component: flower
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    app: "{{ .Chart.Name }}"
+    component: flower
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -15,5 +15,6 @@ spec:
     targetPort: 5555
     protocol: TCP
   selector:
-    app: {{ template "fullname" . }}
+    release: "{{ .Release.Name }}"
+    app: "{{ .Chart.Name }}"
     component: flower

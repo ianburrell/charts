@@ -3,25 +3,21 @@ kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-worker
   labels:
-    app: {{ template "fullname" . }}
-    component: worker
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    app: "{{ .Chart.Name }}"
+    component: worker
 spec:
   replicas: {{ .Values.worker.replicaCount }}
-  selector:
-    matchLabels:
-        app: {{ template "fullname" . }}
-        component: worker
   template:
     metadata:
       labels:
-        app: {{ template "fullname" . }}
-        component: worker
-        chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-        release: "{{ .Release.Name }}"
         heritage: "{{ .Release.Service }}"
+        release: "{{ .Release.Name }}"
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+        app: "{{ .Chart.Name }}"
+        component: worker
     spec:
       containers:
         - name: worker

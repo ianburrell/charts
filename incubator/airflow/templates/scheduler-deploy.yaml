@@ -3,25 +3,21 @@ kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-scheduler
   labels:
-    app: {{ template "fullname" . }}
-    component: scheduler
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    app: "{{ .Chart.Name }}"
+    component: scheduler
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-        app: {{ template "fullname" . }}
-        component: scheduler
   template:
     metadata:
       labels:
-        app: {{ template "fullname" . }}
-        component: scheduler
-        chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-        release: "{{ .Release.Name }}"
         heritage: "{{ .Release.Service }}"
+        release: "{{ .Release.Name }}"
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+        app: "{{ .Chart.Name }}"
+        component: scheduler
     spec:
       containers:
         - name: scheduler
