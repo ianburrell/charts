@@ -25,35 +25,7 @@ spec:
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           args: [ "scheduler" ]
           env:
-            - name: LOAD_EX
-              value: {{ if .Values.loadExamples }}"y"{{ else }}"n"{{ end }}
-            - name: EXECUTOR
-              value: "Celery"
-            - name: FERNET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: fernet-key
-            - name: POSTGRESQL_HOST
-              value: {{ template "postgresql.fullname" . }}
-            - name: POSTGRES_USER
-              value: {{ .Values.postgresql.postgresUser | quote }}
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "postgresql.fullname" . }}
-                  key: postgres-password
-            - name: POSTGRES_DB
-              value: {{ .Values.postgresql.postgresDatabase | quote }}
-            - name: REDIS_HOST
-              value: {{ template "redis.fullname" . }}
-            {{ if .Values.redis.usePassword }}
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "redis.fullname" . }}
-                  key: redis-password
-           {{ end }}
+{{ include "airflow_env" . | indent 10 }}
           ports:
             - containerPort: 8080
           resources: {}
