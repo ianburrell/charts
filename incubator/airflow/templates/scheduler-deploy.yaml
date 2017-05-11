@@ -47,11 +47,13 @@ spec:
               value: {{ .Values.postgresql.postgresDatabase | quote }}
             - name: REDIS_HOST
               value: {{ template "redis.fullname" . }}
+            {{ if .Values.redis.usePassword }}
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "redis.fullname" . }}
                   key: redis-password
+           {{ end }}
           ports:
             - containerPort: 8080
           resources: {}
