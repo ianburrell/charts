@@ -18,6 +18,7 @@ loadExamples: false
 
 service:
   type: NodePort
+  externalPort: 80
 
 worker:
   replicaCount: 1
