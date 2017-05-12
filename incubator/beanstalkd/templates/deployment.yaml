@@ -18,3 +18,13 @@ spec:
           ports:
             - containerPort: 11300
           resources: {}
+{{- if .Values.persistence.enabled }}
+          args: [ "-b", "/var/lib/beanstalkd" ]
+          volumeMounts:
+            - name: beanstalkd-wal
+              mountPath: /var/lib/beanstalkd
+      volumes:
+        - name: beanstalkd-wal
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (include "fullname" .) }}
+{{- end -}}

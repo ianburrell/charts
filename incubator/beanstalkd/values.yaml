@@ -9,3 +9,8 @@ imagepullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 8Gi
