@@ -27,3 +27,4 @@ spec:
           env:
 {{ include "airflow_env" . | indent 10 }}
           resources: {}
+{{ include "airflow_dags" . }}

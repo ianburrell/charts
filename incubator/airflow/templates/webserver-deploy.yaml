@@ -34,3 +34,5 @@ spec:
           ports:
             - containerPort: 8080
           resources: {}
+{{ include "airflow_dags" . }}
+

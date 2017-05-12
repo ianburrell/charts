@@ -16,8 +16,15 @@ loadExamples: false
 ##
 # fernetKey:
 
+## Volume definition for DAGs that will be mounted on /usr/local/airflow/dags
+
+# dags:
+#   volume:
+#     gitRepo:
+#       repository:
+
 service:
-  type: NodePort
+  type: ClusterIP
   externalPort: 80
 
 worker:

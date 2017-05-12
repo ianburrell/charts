@@ -65,3 +65,15 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
       key: redis-password
 {{ end }}
 {{- end -}}
+
+{{- define "airflow_dags" -}}
+{{ if .Values.dags }}
+          volumeMounts:
+            - name: dags
+              mountPath: /usr/local/airflow/dags
+              subPath: {{ default "" .Values.dags.subPath | quote }}
+      volumes:
+        - name: dags
+{{ toYaml .Values.dags.volume | indent 10 }}
+{{ end }}
+{{- end -}}
