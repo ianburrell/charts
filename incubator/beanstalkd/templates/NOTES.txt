@@ -1,0 +1,2 @@
+Beanstalkd can be accessed via port 6379 on the following DNS name from within your cluster:
+{{ template "fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local
