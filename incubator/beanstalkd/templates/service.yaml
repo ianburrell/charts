@@ -7,9 +7,8 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-  - port: 11300
-    targetPort: 11300
-    protocol: TCP
-    name: beanstalkd
+    - port: 11300
+      targetPort: 11300
+      protocol: TCP
   selector:
     app: {{ template "fullname" . }}
