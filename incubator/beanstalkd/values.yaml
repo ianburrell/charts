@@ -13,3 +13,9 @@ persistence:
   enabled: true
   accessMode: ReadWriteOnce
   size: 8Gi
+
+console:
+  image: ianburrell/beanstalk_console
+  imageTag: 1.7.6
+  imagepullPolicy: IfNotPresent
+  

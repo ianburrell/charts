@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}-console
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+        component: console
+    spec:
+      containers:
+        - name: beanstalk-console
+          image: "{{ .Values.console.image }}:{{ .Values.console.imageTag }}"
+          imagePullPolicy: {{ .Values.console.imagePullPolicy }}
+          env:
+            - name: BEANSTALKD_HOST
+              value: {{ template "fullname" . }}
+            - name: BEANSTALKD_PORT
+              value: "11300"
+          ports:
+            - containerPort: 80
+          resources: {}
