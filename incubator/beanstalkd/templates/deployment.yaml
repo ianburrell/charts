@@ -10,6 +10,7 @@ spec:
     metadata:
       labels:
         app: {{ template "fullname" . }}
+        component: beanstalkd
     spec:
       containers:
         - name: {{ .Chart.Name }}
