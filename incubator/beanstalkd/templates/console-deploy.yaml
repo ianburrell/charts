@@ -21,6 +21,10 @@ spec:
               value: {{ template "fullname" . }}
             - name: BEANSTALKD_PORT
               value: "11300"
+            - name: APACHE_PORT
+              value: "80"
+            - name: APACHE_SSL_PORT
+              value: "443"
           ports:
             - containerPort: 80
           resources: {}
