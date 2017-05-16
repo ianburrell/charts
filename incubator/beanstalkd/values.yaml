@@ -7,7 +7,7 @@ imageTag: 1.14
 imagepullPolicy: IfNotPresent
 
 service:
-  type: ClusterIP
+  type: NodePort
 
 persistence:
   enabled: true
@@ -16,6 +16,6 @@ persistence:
 
 console:
   image: ianburrell/beanstalk_console
-  imageTag: 1.7.6
+  imageTag: latest
   imagepullPolicy: IfNotPresent
   
