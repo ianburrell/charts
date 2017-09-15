@@ -30,14 +30,12 @@ service:
 worker:
   replicaCount: 1
   image: puckel/docker-airflow
-  imageTag: 1.8.0
+  imageTag: 1.8.1
 
 postgresql:
-    imageTag: 9.6
-    postgresUser: airflow
-    postgresPassword: airflow
-    postgresDatabase: airflow
+  postgresUser: airflow
+  postgresPassword: airflow
+  postgresDatabase: airflow
 
 redis:
-    imageTag: 3.2.7
-    usePassword: false
+  usePassword: false
