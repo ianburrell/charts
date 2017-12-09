@@ -25,9 +25,13 @@ spec:
             - name: MB_DB_DBNAME
               value: {{ .Values.postgresql.postgresDatabase }}
             - name: MB_DB_USER
-              value: {{ .Values.postgresql.postgresUser }}
+              secretKeyRef:
+                name: {{ template "metabase.fullname" . }}
+                key: postgres-user
             - name: MB_DB_PASS
-              value: {{ .Values.postgresql.postgresPassword }}
+              secretKeyRef:
+                name: {{ template "postgresql.fullname" . }}
+                key: postgres-password
             - name: MB_DB_HOST
               value: {{ template "postgresql.fullname" . }}
             - name: MB_DB_PORT
